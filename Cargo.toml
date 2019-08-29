@@ -7,7 +7,7 @@ license = "MIT OR Apache-2.0"
 name = "as-slice"
 readme = "README.md"
 repository = "https://github.com/japaric/as-slice"
-version = "0.1.1"
+version = "0.2.0"
 
 [dependencies]
 generic-array = "0.13.0"
