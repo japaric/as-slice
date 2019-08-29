@@ -2,6 +2,8 @@
 
 > `AsSlice` and `AsMutSlice` traits
 
+# [Change log](CHANGELOG.md)
+
 ## License
 
 Licensed under either of
