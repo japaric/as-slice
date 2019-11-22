@@ -7,15 +7,19 @@
 //! example, a bound `T: StableDeref + AsMutSlice<Element = u8> + 'static` will accepts types like
 //! `&'static mut [u8]`, `&'static mut [u8; 128]` and `&'static mut GenericArray<u8, U1024>` -- all
 //! of them are appropriate for DMA transfers.
+//!
+//! # Minimal Supported Rust Version (MSRV)
+//!
+//! This crate is guaranteed to compile on stable Rust 1.31 and up. It *might* compile on older
+//! versions but that may change in any new patch release.
 
 #![deny(missing_docs)]
 #![deny(warnings)]
 #![no_std]
 
 extern crate generic_array;
+extern crate ga13;
 extern crate stable_deref_trait;
-
-use generic_array::{ArrayLength, GenericArray};
 
 /// Something that can be seen as an immutable slice
 ///
@@ -83,9 +87,9 @@ impl<T> AsMutSlice for [T] {
     }
 }
 
-impl<T, N> AsSlice for GenericArray<T, N>
+impl<T, N> AsSlice for generic_array::GenericArray<T, N>
 where
-    N: ArrayLength<T>,
+    N: generic_array::ArrayLength<T>,
 {
     type Element = T;
 
@@ -94,9 +98,29 @@ where
     }
 }
 
-impl<T, N> AsMutSlice for GenericArray<T, N>
+impl<T, N> AsMutSlice for generic_array::GenericArray<T, N>
 where
-    N: ArrayLength<T>,
+    N: generic_array::ArrayLength<T>,
+{
+    fn as_mut_slice(&mut self) -> &mut [T] {
+        &mut **self
+    }
+}
+
+impl<T, N> AsSlice for ga13::GenericArray<T, N>
+where
+    N: ga13::ArrayLength<T>,
+{
+    type Element = T;
+
+    fn as_slice(&self) -> &[T] {
+        &**self
+    }
+}
+
+impl<T, N> AsMutSlice for ga13::GenericArray<T, N>
+where
+    N: ga13::ArrayLength<T>,
 {
     fn as_mut_slice(&mut self) -> &mut [T] {
         &mut **self
