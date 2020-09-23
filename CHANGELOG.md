@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v0.1.3] - 2020-02-17
+
+### Added
+
+- `As{,Mut}Slice` implementations for arrays whose lengths are powers of 2 up to
+  `1 << 16`.
+
 ## [v0.1.2] - 2019-11-22
 
 ### Added

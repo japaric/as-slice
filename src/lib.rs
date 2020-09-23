@@ -23,8 +23,10 @@ extern crate stable_deref_trait;
 
 /// Something that can be seen as an immutable slice
 ///
-/// **NOTE**: This trait is implemented for arrays (`[T; N]`) of sizes 0 to 256 (inclusive). These
-/// implementations don't show in the documentation because they would reduce readability.
+/// **NOTE**: This trait is implemented for arrays (`[T; N]`) of sizes 0 to 256
+/// (inclusive) and arrays whose lengths are a power of 2 up to `1 << 16`. These
+/// implementations don't show in the documentation because they would reduce
+/// readability.
 pub trait AsSlice {
     /// The element type of the slice view
     type Element;
@@ -35,8 +37,10 @@ pub trait AsSlice {
 
 /// Something that can be seen as an mutable slice
 ///
-/// **NOTE**: This trait is implemented for arrays (`[T; N]`) of sizes 0 to 256 (inclusive). These
-/// implementations don't show in the documentation because they would reduce readability.
+/// **NOTE**: This trait is implemented for arrays (`[T; N]`) of sizes 0 to 256
+/// (inclusive) and arrays whose lengths are a power of 2 up to `1 << 16`. These
+/// implementations don't show in the documentation because they would reduce
+/// readability.
 pub trait AsMutSlice: AsSlice {
     /// Returns the mutable slice view of `Self`
     fn as_mut_slice(&mut self) -> &mut [Self::Element];
@@ -162,5 +166,10 @@ array!(
     193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211,
     212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230,
     231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249,
-    250, 251, 252, 253, 254, 255, 256
-);
+    250, 251, 252, 253, 254, 255);
+
+#[cfg(not(target_pointer_width = "8"))]
+array!(256, 1 << 9, 1 << 10, 1 << 11, 1 << 12, 1 << 13, 1 << 14, 1 << 15);
+
+#[cfg(not(any(target_pointer_width = "8", target_pointer_width = "16")))]
+array!(1 << 16);
