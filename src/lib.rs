@@ -19,6 +19,7 @@
 
 extern crate generic_array;
 extern crate ga13;
+extern crate ga14;
 extern crate stable_deref_trait;
 
 /// Something that can be seen as an immutable slice
@@ -125,6 +126,26 @@ where
 impl<T, N> AsMutSlice for ga13::GenericArray<T, N>
 where
     N: ga13::ArrayLength<T>,
+{
+    fn as_mut_slice(&mut self) -> &mut [T] {
+        &mut **self
+    }
+}
+
+impl<T, N> AsSlice for ga14::GenericArray<T, N>
+where
+    N: ga14::ArrayLength<T>,
+{
+    type Element = T;
+
+    fn as_slice(&self) -> &[T] {
+        &**self
+    }
+}
+
+impl<T, N> AsMutSlice for ga14::GenericArray<T, N>
+where
+    N: ga14::ArrayLength<T>,
 {
     fn as_mut_slice(&mut self) -> &mut [T] {
         &mut **self
