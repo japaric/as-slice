@@ -10,9 +10,9 @@ repository = "https://github.com/japaric/as-slice"
 version = "0.1.4"
 
 [dependencies]
-generic-array = "0.12.0"
-ga13 = { package = "generic-array", version = "0.13.0" }
-ga14 = { package = "generic-array", version = "0.14.0" }
+generic-array = "0.12.4"
+ga13 = { package = "generic-array", version = "0.13.3" }
+ga14 = { package = "generic-array", version = "0.14.4" }
 
 [dependencies.stable_deref_trait]
 default-features = false
