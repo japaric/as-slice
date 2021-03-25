@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Moved to `const generics` MVP
+
 ## [v0.1.5] - 2021-03-02
 
 ### Fixed
