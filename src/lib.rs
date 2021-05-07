@@ -92,3 +92,22 @@ impl<T, const N: usize> AsMutSlice for [T; N] {
         self
     }
 }
+
+#[cfg(feature = "alloc")]
+extern crate alloc;
+
+#[cfg(feature = "alloc")]
+impl<T> AsSlice for alloc::vec::Vec<T> {
+    type Element = T;
+
+    fn as_slice(&self) -> &[T] {
+        self
+    }
+}
+
+#[cfg(feature = "alloc")]
+impl<T> AsMutSlice for alloc::vec::Vec<T> {
+    fn as_mut_slice(&mut self) -> &mut [T] {
+        self
+    }
+}
