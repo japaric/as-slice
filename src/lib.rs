@@ -28,7 +28,7 @@ pub trait AsSlice {
     fn as_slice(&self) -> &[Self::Element];
 }
 
-/// Something that can be seen as an mutable slice
+/// Something that can be seen as a mutable slice
 pub trait AsMutSlice: AsSlice {
     /// Returns the mutable slice view of `Self`
     fn as_mut_slice(&mut self) -> &mut [Self::Element];
